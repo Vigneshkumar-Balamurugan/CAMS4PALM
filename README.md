@@ -20,7 +20,7 @@ It rewrites or appends chemical species data to an existing **dynamic driver** f
 
 ## Usage
 
-1. Set input file paths and parameters in the script '(./cams4palm/Main_file.m)':
+1. Set input file paths and parameters in the script `(./cams4palm/Main_file.m)`:
 
 ```matlab
 dem_palm_file = "path_to/Munich_static_dem.tif"; % DEM file preprocessed by GEO4PALM
@@ -33,6 +33,6 @@ palm_cbm4 = 'NO'; % YES if your PALM chemistry mechanism is CBM4
 cams_alt_ref_file = 'path_to/cams_pres_level_info.csv'; % CAMS altitude reference CSV file
 dynamic_dri_file_incl_gas = 'path_to/dynamic_driver_with_gas_bc.nc'; % Output file name (.nc file)
 ```
-2. Run the script in MATLAB '(./cams4palm/Main_file.m)'.
+2. Run the script in MATLAB `(./cams4palm/Main_file.m)`.
 3. Output: An updated NetCDF dynamic driver file including selected gaseous species for PALM4U.
 
