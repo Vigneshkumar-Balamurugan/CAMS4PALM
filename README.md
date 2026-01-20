@@ -5,32 +5,30 @@ It rewrites or appends chemical species data to an existing **dynamic driver** f
 
 ## Features
 
-- Process DEM (Digital Elevation Model) data for the PALM4U domain.
-- Extract PALM model run times and dynamic field information.
 - Process CAMS Reanalysis data for selected chemical species.
 - Generate updated NetCDF dynamic driver files including gaseous boundary conditions.
-- Compatible with PALM chemistry mechanisms **SMOG** and **CBM4**.
+- Compatible with PALM chemistry mechanisms **PHSTATP**,**SIMPLEP**,**SMOG** and **CBM4**.
 
 ## Requirements
 
 - MATLAB (tested with R2022b and newer)
 - Input files:
-  - Preprocessed DEM file (`.tif`) from GEO4PALM
-  - Dynamic driver file (`.nc`) from WRF4PALM
-  - CAMS reanalysis dataset (Europe)
-  - CAMS altitude reference CSV file
+  - Preprocessed DEM file (`.tif`) from [GEO4PALM](https://github.com/dongqi-DQ/GEO4PALM)
+  - Dynamic driver file (`.nc`) from [WRF4PALM](https://github.com/dongqi-DQ/WRF4PALM)
+  - [CAMS reanalysis dataset  (Europe)](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-reanalyses?tab=overview)
+  - [CAMS altitude reference CSV file](https://confluence.ecmwf.int/display/UDOC/L137+model+level+definitions)
 
 ## Usage
 
 1. Set input file paths and parameters in the script:
 
 ```matlab
-dem_palm_file = "path_to/Munich_static_dem.tif";
-dynamic_dri_file = "path_to/dynamic_driver.nc";
-cams_folder = 'path_to/CAMS_europe_reanalysis_clip';
-spe_to_inc = {'co', 'no', 'no2', 'o3', 'pm2p5', 'pm10', 'chocho', 'hcho', 'nh3', 'nmvoc'};
-nmvoc_to_rh_ratio = 1;
-palm_smog = 'NO';
-palm_cbm4 = 'NO';
-cams_alt_ref_file = 'path_to/cams_pres_level_info.csv';
-dynamic_dri_file_incl_gas = 'path_to/dynamic_driver_with_gas_bc.nc';
+dem_palm_file = "path_to/Munich_static_dem.tif"; % DEM file preprocessed by GEO4PALM
+dynamic_dri_file = "path_to/dynamic_driver.nc"; % Dynamic driver file preprocessed by WRF4PALM
+cams_folder = 'path_to/CAMS_europe_reanalysis_clip'; % CAMS EUROPE REANALYSIS dataset folder
+spe_to_inc = {'co', 'no', 'no2', 'o3', 'pm2p5', 'pm10', 'chocho', 'hcho', 'nh3', 'nmvoc'}; % Choose the gaseous species to be included in the output file 
+nmvoc_to_rh_ratio = 1; % Ratio of nmvoc to rh (alkanes)
+palm_smog = 'NO'; % YES if your PALM chemistry mechanism is SMOG
+palm_cbm4 = 'NO'; % YES if your PALM chemistry mechanism is CBM4
+cams_alt_ref_file = 'path_to/cams_pres_level_info.csv'; % CAMS altitude reference CSV file
+dynamic_dri_file_incl_gas = 'path_to/dynamic_driver_with_gas_bc.nc'; % Output file name (.nc file)
